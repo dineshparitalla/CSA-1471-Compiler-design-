@@ -1,0 +1,129 @@
+#include<stdio.h>
+#include<string.h>
+int e(),edash(),t(),tdash(),f();
+char *ip;
+char string[50];
+int main()
+{
+printf("enter the string\n");
+scanf("%s",string);
+ip=string;
+printf("\n\ninput\taction\n--------------------------------\n");
+ 
+if(e() && ip=="\0"){
+printf("\n--------------------------------\n");
+printf("\n string is successfully parsed\n");
+}
+else{
+printf("\n--------------------------------\n");
+printf("error in parsing string\n");
+}
+}
+int e()
+{
+printf("%s\te->te' \n",ip);
+if(t())
+{
+if(edash())
+{
+return 1;
+}
+else
+return 0;
+}
+else
+return 0;
+}
+int edash()
+{
+if(*ip=='+')
+{
+printf("%s\te'->+te' \n",ip);
+ip++;
+if(t())
+{
+if(edash())
+{
+return 1;
+}
+else
+return 0;
+}
+else
+return 0;
+}
+else
+{
+printf("%s\te'->^ \n",ip);
+return 1;
+}
+}
+int t()
+{
+printf("%s\tt->ft' \n",ip);
+if(f())
+{
+ 
+if(tdash())
+{
+return 1;
+}
+else
+return 0;
+}
+else
+return 0;
+}
+int tdash()
+{
+if(*ip=='*')
+{
+printf("%s\tt'->*ft' \n",ip);
+ip++;
+if(f())
+{
+if(tdash())
+{
+return 1;
+}
+else
+return 0;
+}
+else
+return 0;
+}
+else
+{
+printf("%s\tt'->^ \n",ip);
+return 1;
+}
+}
+int f()
+{
+if(*ip=='(')
+{
+printf("%s\tf->(e) \n",ip);
+ip++;
+if(e())
+{
+if(*ip==')')
+{
+ip++;
+return 0;
+}
+else
+return 0;
+}
+else
+return 0;
+}
+ 
+else if(*ip=='i')
+{
+ip++;
+printf("%s\tf->id \n",ip);
+return 1;
+}
+else
+return 0;
+} 
